@@ -27,7 +27,7 @@ export const fetchRandomUnifiedArtworks = async () => {
     title: art.title,
     imageUrl: art.images?.web?.url,
     artist: art.creators?.map((c: any) => c.description).join(', ') || 'Unknown',
-    source: 'cleveland'
+    source: 'The Cleveland Museum of Art'
   }));
 
   const formattedHarvard = harvardData.map((art: any) => ({
@@ -35,7 +35,7 @@ export const fetchRandomUnifiedArtworks = async () => {
     title: art.title,
     imageUrl: art.baseimageurl,
     artist: art.people?.map((p: any) => p.name).join(', ') || 'Unknown',
-    source: 'harvard'
+    source: 'Harvard Art Museums'
   }));
 
   return [...formattedCleveland, ...formattedHarvard];
