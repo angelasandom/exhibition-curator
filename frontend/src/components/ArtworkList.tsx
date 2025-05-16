@@ -1,25 +1,17 @@
 import React from 'react';
 import Artwork from './Artwork';
+import type { ArtworkType } from '../types/ArtworkType';
 
-interface ArtworkData {
-  id: string;
-  title: string;
-  imageUrl: string;
-  artist: string;
+interface Props {
+  artworks: ArtworkType[];
 }
 
-interface ArtworkListProps {
-  artworks: ArtworkData[];
-}
-
-const ArtworkList: React.FC<ArtworkListProps> = ({ artworks }) => {
-  return (
-    <div className="artwork-list">
-      {artworks.map((artwork) => (
-        <Artwork key={artwork.id} artwork={artwork} />
-      ))}
-    </div>
-  );
-};
+const ArtworkList: React.FC<Props> = ({ artworks }) => (
+  <div className="artwork-list">
+    {artworks.map(art => (
+      <Artwork key={art.id} artwork={art} />
+    ))}
+  </div>
+);
 
 export default ArtworkList;
