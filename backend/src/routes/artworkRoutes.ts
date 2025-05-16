@@ -7,4 +7,3 @@ router.get('/random', getRandomArtworks);
 
 export default router;
 
-

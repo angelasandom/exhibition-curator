@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors'; 
+import artworkRoutes from './routes/artworkRoutes'
 
 dotenv.config();
 
@@ -26,7 +27,9 @@ mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true } a
   app.get('/', (req, res) => {
   res.send('Backend is working');
   });
-  
+
+  app.use('/api/artworks', artworkRoutes);
+
   //port
   
   const port = parseInt(process.env.PORT || '5000', 10);
