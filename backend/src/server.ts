@@ -1,21 +1,23 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import cors from 'cors'; 
 
 dotenv.config();
 
 const app =express();
 
+app.use(cors());
 app.use(express.json());
 
-const mongoDBUri = process.env.MONGODB_URI;
+const mongoUri = process.env.MONGO_URI;
 
-if (!mongoDBUri) {
+if (!mongoUri) {
   console.error('No MongoDB URI in .env');
   process.exit(1); 
 }
 
-mongoose.connect(mongoDBUri, { useNewUrlParser: true, useUnifiedTopology: true } as mongoose.ConnectOptions)
+mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true } as mongoose.ConnectOptions)
   .then(() => console.log('Connected to MongoDB'))
   .catch((err: Error) => console.error('Error connecting MongoDB:', err));
 
