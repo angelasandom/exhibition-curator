@@ -26,7 +26,7 @@ export const fetchRandomUnifiedArtworks = async () => {
     id: art.id,
     title: art.title,
     imageUrl: art.images?.web?.url,
-    artist: art.creators?.map((c: any) => c.description).join(', ') || 'Unknown',
+    creator: art.creators?.map((c: any) => c.description).join(', ') || 'Unknown',
     source: 'The Cleveland Museum of Art'
   }));
 
@@ -34,7 +34,7 @@ export const fetchRandomUnifiedArtworks = async () => {
     id: art.id,
     title: art.title,
     imageUrl: art.baseimageurl,
-    artist: art.people?.map((p: any) => p.name).join(', ') || 'Unknown',
+    creator: art.people?.map((p: any) => p.name).join(', ') || 'Unknown',
     source: 'Harvard Art Museums'
   }));
 
