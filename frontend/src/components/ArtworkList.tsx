@@ -1,6 +1,7 @@
 import React from 'react';
 import Artwork from './Artwork';
 import type { ArtworkType } from '../types/ArtworkType';
+import './ArtworkList.css'
 
 interface Props {
   artworks: ArtworkType[];
