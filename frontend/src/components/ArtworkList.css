@@ -1,0 +1,9 @@
+.artwork-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5rem;
+  padding: 8rem;
+  margin: 1rem 8rem;
+  grid-auto-rows: minmax(min-content, max-content);
+  align-items: stretch;
+}  
