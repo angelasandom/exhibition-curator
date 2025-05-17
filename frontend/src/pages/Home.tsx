@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import ArtworkList from '../components/ArtworkList';
 import type { ArtworkType } from '../types/ArtworkType';
+import Navbar from '../components/Navbar';
 
 const Home: React.FC = () => {
   const [randomKey] = useState(() => Date.now()); //Change artworks when refreshing page
@@ -24,7 +25,15 @@ const Home: React.FC = () => {
 
   return (
     <div>
-      <h1>Exhibition Curator</h1>
+      <header>
+        <h1 className='header-title'>Exhibition Curator</h1>
+        <Navbar />
+      </header>
+      <div className='subheader'>
+        <h2 className='text-gallery'>Manage your own Art Gallery</h2>
+        <h3 className='text-collections'>Create different Art Collections</h3>
+        <p className="feature-text">FEATURE ARTWORKS:</p>
+      </div>
       <ArtworkList artworks={data} />
     </div>
   );

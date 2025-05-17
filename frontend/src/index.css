@@ -4,6 +4,30 @@
   box-sizing: border-box;
 }
 
+header {
+  background-color: black;
+  padding-top: 3rem;
+  padding-bottom: 1.5rem;
+}
+
+.header-title {
+  padding: 2rem;
+}
+
+.subheader {
+  padding-top: 4rem;
+}
+
+.subheader .text-collections {
+  margin-bottom: 4rem;
+}
+
+.subheader .feature-text {
+  margin: 0.5rem;
+  margin-left: 16rem;
+  color:rgb(230, 227, 230)
+}
+
 body {
   font-family: 'Inter', sans-serif;
   font-size: 1rem;

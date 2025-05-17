@@ -1,9 +1,12 @@
 .artwork-list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 5rem;
+  column-gap: 8rem;
+  row-gap: 3rem;
   padding: 8rem;
-  margin: 1rem 8rem;
+  padding-top: 0;
+  margin: 8rem;
+  margin-top: 0;;
   grid-auto-rows: minmax(min-content, max-content);
   align-items: stretch;
 }  
