@@ -8,7 +8,9 @@
     "strict": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "lib": ["ES2020", "ESNext.AsyncIterable"] 
+    "lib": ["ES2020", "DOM"],                     
+    "moduleResolution": "node",                      
+    "types": ["node"]                                
   },
   "include": [
     "src/**/*.ts"
