@@ -15,7 +15,12 @@ if (!MONGO_URI) {
   process.exit(1);
 }
 
-app.use(cors());
+app.use(cors({
+  origin: ['https://exhibition-curator-art-gallery.netlify.app'],
+  credentials: true,
+})
+);
+
 app.use(express.json());
 
 app.use('/api/artworks', artworkRoutes);
