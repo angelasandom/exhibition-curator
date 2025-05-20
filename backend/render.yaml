@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: exhibition-backend
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: MONGO_URI
+        fromEnvVar: MONGO_URI
+      - key: HARVARD_API_KEY
+        fromEnvVar: HARVARD_API_KEY
