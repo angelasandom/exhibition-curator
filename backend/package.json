@@ -9,6 +9,9 @@
     "start": "node dist/index.js",
     "build": "tsc"
   },
+  "engines": {
+     "node": "v18.19.1"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
