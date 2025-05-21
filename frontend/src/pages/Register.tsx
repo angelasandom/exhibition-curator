@@ -2,6 +2,7 @@ import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -31,6 +32,7 @@ const Register = () => {
 
   return (
     <div className="login-box">
+      <Navbar />
       <h2 className="login-text">Register</h2>
 
       <form onSubmit={handleRegister} className="form-box">

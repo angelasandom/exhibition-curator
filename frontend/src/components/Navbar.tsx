@@ -1,5 +1,4 @@
 import React from "react";
-import SearchBar from "./SearchBar";
 import "./Navbar.css"
 
 const Navbar: React.FC = () => {
@@ -11,7 +10,6 @@ const Navbar: React.FC = () => {
               <a href="#"><i className="fa-solid fa-landmark"></i>My Art Gallery</a>
               <a href="#"><i className="fa-solid fa-user-gear"></i>Profile</a>
             </div>
-            <SearchBar />
           </div>
         </>
     )
