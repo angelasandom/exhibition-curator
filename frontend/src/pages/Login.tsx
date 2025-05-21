@@ -59,18 +59,21 @@ const Login = () => {
           required
           className="input"
         />
-        <button type="submit" className="email-button">
-          Login with your Email
-        </button>
+        <button type="submit" className="primary-button">Login with your Email</button>
       </form>
 
       <div className="choose-login">— o —</div>
 
-      <button onClick={handleGoogleLogin} className="google-button">
-        Login with your Google account
-      </button>
+      <button onClick={handleGoogleLogin} className="primary-button">Login with your Google account</button>
 
+      <div className="choose-login">— or —</div>
+
+      <p>Don't have an account?</p>
+      
+      <button className="secondary-button"><a href="/register" className="register-link">Register</a></button> 
+      
       {error && <p className="error-text">{error}</p>}
+
     </div>
   );
 };

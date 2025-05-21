@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Home from './pages/Home';
 import './index.css';
 import Login from './pages/Login';
+import Register from './pages/Register';
 
 const queryClient = new QueryClient();
 
@@ -13,6 +14,7 @@ const App: React.FC = () => (
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   </QueryClientProvider>
