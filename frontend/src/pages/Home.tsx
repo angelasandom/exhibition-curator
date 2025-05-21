@@ -23,7 +23,6 @@ const Home: React.FC = () => {
   return (
     <div>
       <header>
-        <h1 className='header-title'>Exhibition Curator</h1>
         <Navbar />
         <SearchBar />
       </header>
