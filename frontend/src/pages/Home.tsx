@@ -4,6 +4,7 @@ import ArtworkList from '../components/ArtworkList';
 import Navbar from '../components/Navbar';
 import type { ArtworkType } from '../types/ArtworkType';
 import { fetchRandomArtworks } from '../services/api';
+import SearchBar from '../components/SearchBar';
 
 const Home: React.FC = () => {
   const [randomKey] = useState(() => Date.now()); //Change artworks when refreshing page
@@ -24,6 +25,7 @@ const Home: React.FC = () => {
       <header>
         <h1 className='header-title'>Exhibition Curator</h1>
         <Navbar />
+        <SearchBar />
       </header>
       <div className='subheader'>
         <h2 className='text-gallery'>Manage your own Art Gallery</h2>
