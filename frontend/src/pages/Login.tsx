@@ -7,6 +7,7 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase";
 import { useUser } from "../context/UserContext";
+import Navbar from "../components/Navbar";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -39,6 +40,8 @@ const Login = () => {
   };
 
   return (
+    <>
+    <Navbar />
     <div className="login-box">
       <h2 className="login-text">Log in</h2>
 
@@ -75,6 +78,7 @@ const Login = () => {
       {error && <p className="error-text">{error}</p>}
 
     </div>
+    </>
   );
 };
 
