@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { createUserInMongoDB } from "../services/userService";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
 import Navbar from "../components/Navbar";
 
 const Register = () => {
@@ -10,6 +12,10 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+
+  const { mutateAsync: createUser } = useMutation({
+    mutationFn: createUserInMongoDB,
+  })
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,7 +27,19 @@ const Register = () => {
     }
 
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      if (!user.email) {
+        throw new Error("Email is missing.");
+      }
+
+      await createUser({
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName ?? "",
+      });
+
       alert("You are registered.");
       navigate("/login");
     } catch (err: any) {
