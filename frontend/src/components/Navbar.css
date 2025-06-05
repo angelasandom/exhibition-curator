@@ -8,6 +8,24 @@
     padding-bottom: 1rem;
 }
 
+.nav-user-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.welcome-msg {
+  color: white;
+}
+
+.logout-button {
+  background: transparent;
+  border: 1px solid #fff;
+  color: white;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
 .navbar a {
     float: center;
     color:#ffffff;

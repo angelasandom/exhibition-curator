@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { createUserInMongoDB } from "../services/userService";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
@@ -35,10 +35,14 @@ const Register = () => {
         throw new Error("Email is missing.");
       }
 
+      await updateProfile(user, {
+        displayName: displayName
+      });
+
       await createUser({
         uid: user.uid,
         email: user.email,
-        displayName
+        displayName: displayName
       });
 
       alert("You are registered.");
@@ -47,7 +51,6 @@ const Register = () => {
       setError(err.message);
     }
   };
-
 
   return (
     <div className="login-box">
