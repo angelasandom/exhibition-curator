@@ -17,10 +17,9 @@ if (!MONGO_URI) {
 }
 
 app.use(cors({
-  origin: ['https://exhibition-curator-art-gallery.netlify.app'],
-  credentials: true,
-})
-);
+  origin: ['http://localhost:5173', 'https://exhibition-curator-art-gallery.netlify.app'],
+  credentials: true
+}));
 
 app.use(express.json());
 
@@ -33,10 +32,7 @@ app.get('/', (_req, res) => {
 });
 
 mongoose
-  .connect(MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  } as mongoose.ConnectOptions)
+  .connect(MONGO_URI)
   .then(() => {
     console.log('MongoDB is connected');
     app.listen(PORT, () => {

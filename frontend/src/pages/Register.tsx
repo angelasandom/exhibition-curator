@@ -10,6 +10,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [displayName, setDisplayName] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -37,7 +38,7 @@ const Register = () => {
       await createUser({
         uid: user.uid,
         email: user.email,
-        displayName: user.displayName ?? "",
+        displayName
       });
 
       alert("You are registered.");
@@ -54,6 +55,14 @@ const Register = () => {
       <h2 className="login-text">Register</h2>
 
       <form onSubmit={handleRegister} className="form-box">
+        <input
+          type="text"
+          placeholder="Your name"
+          value={displayName}
+          onChange={(e) => setDisplayName(e.target.value)}
+          required
+          className="input"
+        />
         <input
           type="email"
           placeholder="Email"
