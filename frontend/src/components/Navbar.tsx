@@ -13,9 +13,8 @@ const Navbar: React.FC = () => {
           <h1 className='header-title'>Exhibition Curator</h1>
           <div className="navbar">
             <div className="nav-links">
-              <a className="active" href="#"><i className="fa-solid fa-house"></i>Home</a>
-              <a href="#"><i className="fa-solid fa-landmark"></i>My Art Gallery</a>
-              <a href="#"><i className="fa-solid fa-user-gear"></i>Profile</a>
+              <a className="active" href="/"><i className="fa-solid fa-house"></i>Home</a>
+              <a href="/mygallery"><i className="fa-solid fa-landmark"></i>My Art Gallery</a>
               {user ? (
               <div className="nav-user-actions">
                 <span className="welcome-msg">Welcome, {user.displayName}</span>
