@@ -4,6 +4,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import artworkRoutes from './routes/artworkRoutes';
 import userRoutes from './routes/userRoutes';
+import collectionRoutes from "./routes/collectionRoutes";
 
 dotenv.config();
 
@@ -26,6 +27,8 @@ app.use(express.json());
 app.use('/api/artworks', artworkRoutes);
 
 app.use("/api", userRoutes);
+
+app.use("/api/collections", collectionRoutes); 
 
 app.get('/', (_req, res) => {
   res.send('Backend is working');

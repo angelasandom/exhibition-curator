@@ -10,7 +10,10 @@
     "forceConsistentCasingInFileNames": true,
     "lib": ["ES2020", "DOM"],                     
     "moduleResolution": "node",                      
-    "types": ["node"]                                
+    "types": ["node"],
+    "typeRoots": ["./node_modules/@types", "./src/types"], 
+    "noImplicitReturns": false,
+    "noImplicitAny": false                 
   },
   "include": [
     "src/**/*.ts"

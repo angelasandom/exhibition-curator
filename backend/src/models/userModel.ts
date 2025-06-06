@@ -1,27 +1,26 @@
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema(
-    {
-        uid: {
-            type: String,
-            required: true,
-            unique: true,
-        },
-        email: {
-            type: String,
-            required: true,
-        },
-        displayName: {
-            type: String,
-            required: true,
-        },
-        createdAt: {
-            type: Date,
-            default: Date.now,
-        },
-    },
-    { collection: "users" }
-);
+const ArtworkSchema = new mongoose.Schema({
+  id: { type: String, required: true },
+  title: { type: String, required: true },
+  creator: { type: String, default: 'Unknown' },
+  imageUrl: { type: String, required: true },
+  culture: String,
+  technique: String,
+  source: { type: String, required: true }, // 'Harvard Art Museums' o 'The Cleveland Museum of Art'
+  type: String
+});
 
-const User = mongoose.model("User", userSchema);
-export default User;
+const CollectionSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  artworks: [ArtworkSchema],
+}, { timestamps: true });
+
+const UserSchema = new mongoose.Schema({
+  uid: { type: String, required: true, unique: true }, // Firebase UID
+  email: { type: String, required: true, unique: true },
+  displayName: String,
+  collections: [CollectionSchema],
+}, { timestamps: true });
+
+export default mongoose.model('User', UserSchema);
