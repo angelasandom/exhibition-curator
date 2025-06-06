@@ -1,6 +1,9 @@
-export default interface User {
-  id: string;
-  name: string;
+export interface NewUser {
+  uid: string;
   email: string;
-  token: string;
+  displayName: string;
+}
+
+export interface User extends NewUser {
+  token?: string;
 }

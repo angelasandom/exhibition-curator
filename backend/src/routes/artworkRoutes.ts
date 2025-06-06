@@ -1,9 +1,11 @@
 import express from "express";
-import { getRandomArtworks } from '../controllers/artworkController';
+import { getRandomArtworks, searchArtworks } from '../controllers/artworkController';
 
 const router = express.Router();
 
 router.get('/random', getRandomArtworks);
+
+router.get('/search', searchArtworks);
 
 export default router;
 

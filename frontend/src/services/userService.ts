@@ -1,10 +1,5 @@
 import axios from "axios";
-
-interface NewUser {
-  uid: string;
-  email: string;
-  displayName: string;
-}
+import type { NewUser } from "../types/User";
 
 export const createUserInMongoDB = async (userData: NewUser) => {
   const { data } = await axios.post(

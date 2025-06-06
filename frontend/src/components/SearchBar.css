@@ -1,0 +1,45 @@
+.search-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.input {
+  flex: 1;
+  padding: 8px;
+}
+
+.search-button {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.filter-select {
+  padding: 6px;
+}
+
+.active-filters {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-chip {
+  background-color: #eee;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+}
+
+.filter-chip  button {
+  background: none;
+  border: none;
+  margin-left: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}

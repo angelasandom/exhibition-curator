@@ -5,5 +5,6 @@ export interface ArtworkType {
   creator: string;
   culture?: string;
   technique?: string;
+  type?: string;
   source: 'The Cleveland Museum of Art' | 'Harvard Art Museums';
 }

@@ -1,7 +1,16 @@
 import axios from 'axios';
 
-export const fetchRandomUnifiedArtworks = async () => {
-  const artworks: any[] = [];
+export interface UnifiedArtwork {
+  id: string;
+  title: string;
+  imageUrl: string;
+  creator: string;
+  source: string;
+  type: string;
+}
+
+export const fetchRandomUnifiedArtworks = async (): Promise<UnifiedArtwork[]> => {
+  const artworks: UnifiedArtwork[] = [];
 
   const fetchHarvard = async () => {
     const res = await axios.get('https://api.harvardartmuseums.org/object', {
@@ -19,7 +28,8 @@ export const fetchRandomUnifiedArtworks = async () => {
       title: art.title,
       imageUrl: art.baseimageurl || art.primaryimageurl,
       creator: art.people?.map((p: any) => p.name).join(', ') || 'Unknown',
-      source: 'Harvard Art Museums'
+      source: 'Harvard Art Museums',
+      type: art.classification || "Unknown",
 }));
   };
 
@@ -31,21 +41,18 @@ export const fetchRandomUnifiedArtworks = async () => {
     }
   });
 
-  const formatted = res.data.data
+  return res.data.data
     .filter((art: any) => art.images?.web?.url)
     .map((art: any) => ({
       id: art.id,
       title: art.title,
       imageUrl: art.images.web.url,
       creator: art.creators?.map((c: any) => c.description).join(', ') || 'Unknown',
-      source: 'The Cleveland Museum of Art'
-    }));
-
-  // Get random artwork from CLeveland
-  const shuffled = formatted.sort(() => 0.5 - Math.random()).slice(0, 5);
-  return shuffled;
+      source: 'The Cleveland Museum of Art',
+      type: art.type || "Unknown"
+    }))
+    .sort(() => 0.5 - Math.random()).slice(0, 5);
 };
-
 
 let attempts = 0;
 while (artworks.length < 20 && attempts < 5) {
@@ -54,14 +61,14 @@ while (artworks.length < 20 && attempts < 5) {
 
   for (const art of combined) {
     if (artworks.length >= 20) break;
-    if (!artworks.some(a => a.id === art.id)) {
+    if (!artworks.some((a) => a.id === art.id)) {
       artworks.push(art);
     }
   }
 
   attempts++;
 }
-//Mix artworks from both APIs
+
 artworks.sort(() => Math.random() - 0.5);
 
   return artworks;
