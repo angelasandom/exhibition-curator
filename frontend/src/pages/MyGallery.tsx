@@ -2,6 +2,8 @@ import React, { useEffect, useState, useCallback } from "react";
 import { useCollections } from "../hooks/useCollections";
 import type { ArtworkType } from "../types/ArtworkType";
 import { useUser } from "../context/UserContext";
+import CollectionArtwork from "../components/CollectionArtwork";
+import Navbar from "../components/Navbar";
 import "./MyGallery.css";
 
 const MyGallery: React.FC = () => {
@@ -90,7 +92,7 @@ const MyGallery: React.FC = () => {
 
   return (
     <div className="my-gallery-container">
-      <h2 className="my-gallery-title">Your Collections</h2>
+      <Navbar />
       
       <div className="create-collection-section">
         {!showCreateForm ? (
@@ -142,29 +144,25 @@ const MyGallery: React.FC = () => {
                 Delete Collection
               </button>
             </div>
-            <div className="artwork-list">
-              {col.artworks && col.artworks.length > 0 ? (
-                col.artworks.map((art: ArtworkType) => (
-                  <div key={art.id} className="artwork-card">
-                    <img 
-                      src={art.imageUrl} 
-                      alt={art.title} 
-                      className="artwork-image"
-                    />
-                    <h4 className="artwork-title">{art.title}</h4>
-                    <p className="artwork-creator">{art.creator}</p>
+            
+            {col.artworks && col.artworks.length > 0 ? (
+              <div className="collection-artworks-grid">
+                {col.artworks.map((art: ArtworkType) => (
+                  <div key={art.id} className="collection-artwork-wrapper">
+                    <CollectionArtwork artwork={art} />
                     <button 
                       onClick={() => handleRemove(col.name, art.id)}
-                      className="remove-artwork-btn"
+                      className="remove-from-collection-btn"
+                      title="Remove from collection"
                     >
-                      Remove
+                      ×
                     </button>
                   </div>
-                ))
-              ) : (
-                <p className="no-artworks-message">No artworks in this collection</p>
-              )}
-            </div>
+                ))}
+              </div>
+            ) : (
+              <p className="no-artworks-message">No artworks in this collection</p>
+            )}
           </div>
         ))
       )}

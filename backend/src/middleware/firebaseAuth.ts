@@ -1,9 +1,12 @@
 import { Request, Response, NextFunction } from "express";
 import * as admin from "firebase-admin";
 
+
 import User from "../models/userModel";
 
-const serviceAccount = require("../../config/firebaseServiceAccountKey.json");
+const serviceAccount = process.env.FIREBASE_SERVICE_ACCOUNT 
+  ? JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT)
+  : require('../config/firebaseServiceAccountKey.json');
 
 if (!admin.apps.length) {
 
@@ -54,7 +57,7 @@ export const authenticateUser = async (req:Request, res: Response, next: NextFun
   } catch (error) {
     console.error("Authentication error:", error);
     res.status(401).json({ message: "Unauthorized" }
-      
+
     );
   }
 };

@@ -3,80 +3,178 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 1rem;
-    height: 60px;
-    padding-bottom: 1rem;
+    padding: 0 2rem;
+    height: 70px;
+    background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.85) 100%);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    position: relative;
+    z-index: 100;
 }
 
 .nav-user-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-right: 1rem;
 }
 
 .welcome-msg {
-  color: white;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 300;
+    letter-spacing: 0.5px;
 }
 
 .logout-button {
-  background: transparent;
-  border: 1px solid #fff;
-  color: white;
-  padding: 5px 10px;
-  cursor: pointer;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #ffffff;
+    padding: 8px 20px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    font-weight: 400;
+}
+
+.logout-button:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.6);
+    transform: translateY(-1px);
 }
 
 .navbar a {
-    float: center;
-    color:#ffffff;
+    color: #ffffff;
     text-decoration: none;
-    font-size: 1.5rem;
-    padding-right: 1.2rem;
+    font-size: 1.3rem;
+    padding: 0.5rem 1rem;
+    position: relative;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.navbar a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: #ffffff;
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+}
+
+.navbar a:hover::after {
+    width: 70%;
+}
+
+.navbar a:hover {
+    color: rgba(255,255,255,0.9);
+    transform: translateY(-2px);
 }
 
 .nav-links {
-    margin-bottom: -0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     margin-left: 2rem;
 }
 
-.navbar a:first-child{
-    margin-left: 4rem;
+.navbar a:first-child {
+    margin-left: 0;
 }
 
 .nav-links a i {
-    margin: 0.5rem;
-    width: 30px;
-    height: 30px;
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+    vertical-align: middle;
 }
-  
 
 .search-box {
     display: flex;
     align-items: center;
-    justify-content: center;
-    background-color: black;
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    flex: 1;
+    max-width: 500px;
+    margin: 0 2rem;
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: all 0.3s ease;
+}
+
+.search-box:focus-within {
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.3);
+    box-shadow: 0 0 20px rgba(255,255,255,0.1);
 }
   
 .search-box input {
-    padding: 0.5rem 0.75rem;
-    font-size: 1rem;
-    height: 40px;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
+    background: transparent;
     border: none;
-    border-radius: 4px 0 0 4px;
+    outline: none;
+    color: #ffffff;
+    flex: 1;
+    font-weight: 300;
+}
+
+.search-box input::placeholder {
+    color: rgba(255,255,255,0.5);
 }
   
 .search-box button {
-    height: 40px;
-    padding: 0 0.75rem;
-    background-color: #444;
-    color: white;
+    padding: 0.6rem 1.2rem;
+    background: transparent;
+    color: rgba(255,255,255,0.8);
     border: none;
-    border-radius: 0 4px 4px 0;
     cursor: pointer;
-    margin-right: 4rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-box button:hover {
+    color: #ffffff;
+    background: rgba(255,255,255,0.1);
 }
   
 .search-box button i {
-    font-size: 1rem;
+    font-size: 1.1rem;
 }
-  
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0 1rem;
+        height: auto;
+        min-height: 60px;
+        flex-wrap: wrap;
+    }
+    
+    .nav-links {
+        margin-left: 0;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        padding: 0.5rem 0;
+    }
+    
+    .search-box {
+        width: 100%;
+        margin: 0.5rem 0;
+        max-width: none;
+    }
+    
+    .nav-user-actions {
+        margin-left: auto;
+    }
+    
+    .navbar a {
+        font-size: 1.1rem;
+        padding: 0.4rem 0.8rem;
+    }
+}

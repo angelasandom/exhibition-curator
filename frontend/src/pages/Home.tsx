@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar';
 import type { ArtworkType } from '../types/ArtworkType';
 import { fetchRandomArtworks, fetchFilteredArtworks } from '../services/api';
 import SearchBar from '../components/SearchBar';
+import "./Home.css"
 
 const itemsPerPage = 10;
 
@@ -82,7 +83,6 @@ const Home: React.FC = () => {
       <div className='subheader'>
         <h2 className= 'text-gallery'>Manage your own Art Gallery</h2>
         <h3 className='text-collections'>Create different Art Collections</h3>
-        <p className="feature-text">FEATURE ARTWORKS:</p>
       </div>
 
       <ArtworkList artworks= {filteredResults.length ? paginatedResults : randomArtworks} />

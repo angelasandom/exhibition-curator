@@ -1,7 +1,7 @@
 /* CreateCollectionButton.css */
 
 .add-to-collection-btn {
-  background-color: #ff6b6b;
+  background-color: #402649;
   color: white;
   border: none;
   padding: 8px 12px;
@@ -13,7 +13,7 @@
 }
 
 .add-to-collection-btn:hover {
-  background-color: #ff5252;
+  background-color: #6e3894;
 }
 
 .modal-overlay {

@@ -57,3 +57,35 @@ p {
   font-size: 0.8rem;
 }
 
+@media (max-width: 768px) {
+  header {
+    padding-top: 1.5rem;
+    padding-bottom: 1rem;
+  }
+  
+  .header-title {
+    padding: 1rem;
+  }
+  
+  .subheader {
+    padding-top: 2rem;
+  }
+  
+  .subheader .feature-text {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    text-align: center;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  h3 {
+    font-size: 1.1rem;
+  }
+}

@@ -8,6 +8,7 @@ import {
 import { auth } from "../firebase";
 import { useUser } from "../context/UserContext";
 import Navbar from "../components/Navbar";
+import "./Login.css"
 
 const Login = () => {
   const [email, setEmail] = useState("");

@@ -54,7 +54,6 @@ const Register = () => {
 
   return (
     <div className="login-box">
-      <Navbar />
       <h2 className="login-text">Register</h2>
 
       <form onSubmit={handleRegister} className="form-box">
