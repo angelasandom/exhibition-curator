@@ -133,7 +133,11 @@ Artwork Search
 BACKEND ENDPOINTS
 
 GET /api/collections - Get user's collections
+
 POST /api/collections - Create new collection
+
 DELETE /api/collections/:id - Delete collection
+
 POST /api/collections/:id/artworks - Add artwork to collection
+
 DELETE /api/collections/:id/artworks/:artworkId - Remove artwork
