@@ -86,36 +86,56 @@ cd exhibition-curator
 - Backend Setup
 
 bashcd backend
+
 npm install
+
 Create .env file in backend folder:
+
 MONGODB_URI=your_mongodb_connection_string
 PORT=5000
+
 Add Firebase service account key:
 
 Download from Firebase Console > Project Settings > Service Accounts
+
 Save as backend/src/config/firebaseServiceAccountKey.json
 
 - Frontend Setup
 
 bashcd ../frontend
+
 npm install
+
 Create .env file in frontend folder:
+
 VITE_BACKEND_URL=http://localhost:5000
+
 VITE_HARVARD_API_KEY=your_harvard_api_key
+
 VITE_FIREBASE_API_KEY=your_firebase_api_key
+
 VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
+
 VITE_FIREBASE_PROJECT_ID=your_project_id
+
 VITE_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+
 VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+
 VITE_FIREBASE_APP_ID=your_app_id
 
 - Run the application
 
 Terminal 1 (Backend):
+
 bashcd backend
+
 npm run dev
+
 Terminal 2 (Frontend):
+
 bashcd frontend
+
 npm run dev
 
 Access the application
