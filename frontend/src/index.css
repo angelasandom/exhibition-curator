@@ -4,6 +4,15 @@
   box-sizing: border-box;
 }
 
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 header {
   background-color: black;
   padding-top: 3rem;
