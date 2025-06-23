@@ -4,6 +4,7 @@ import type { ArtworkType } from "../types/ArtworkType";
 import { useUser } from "../context/UserContext";
 import CollectionArtwork from "../components/CollectionArtwork";
 import Navbar from "../components/Navbar";
+import LoadingSpinner from "../components/LoadingSpinner";
 import "./MyGallery.css";
 
 const MyGallery: React.FC = () => {
@@ -75,12 +76,12 @@ const MyGallery: React.FC = () => {
   };
 
   if (loading) {
-    return (
-      <div className="my-gallery-container">
-        <div className="loading-message">Loading...</div>
-      </div>
-    );
-  }
+  return (
+    <div className="my-gallery-container">
+      <LoadingSpinner />
+    </div>
+  );
+}
 
   if (!user) {
     return (

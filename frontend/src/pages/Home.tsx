@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar';
 import type { ArtworkType } from '../types/ArtworkType';
 import { fetchRandomArtworks, fetchFilteredArtworks } from '../services/api';
 import SearchBar from '../components/SearchBar';
+import LoadingSpinner from "../components/LoadingSpinner";
 import "./Home.css";
 
 const itemsPerPage = 10;
@@ -81,7 +82,7 @@ const Home: React.FC = () => {
     if (currentPage > 1) setCurrentPage((prev) => prev - 1);
   };
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <LoadingSpinner />;
   if (error) return <p>Error loading artworks.</p>;
 
   return (
