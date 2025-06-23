@@ -22,7 +22,7 @@ const SearchBar: React.FC<Props> = ({
   return (
     <>
 
-      <form className="search-box">
+      <div className="search-box">
         <input
           type= "text"
           placeholder="Search artworks"
@@ -43,7 +43,7 @@ const SearchBar: React.FC<Props> = ({
           <option value="Photograph">Photograph</option>
           <option value="Ceramic">Ceramic</option>
         </select>
-      </form>
+      </div>
 
       <div className="active-filters">
         {selectedType && (
