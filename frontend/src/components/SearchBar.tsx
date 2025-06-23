@@ -6,7 +6,6 @@ interface Props {
   setSearchTerm: (val: string) => void;
   selectedType: string;
   setSelectedType: (val: string) => void;
-  onSearch: () => void;
 
 }
 
@@ -14,22 +13,16 @@ const SearchBar: React.FC<Props> = ({
   searchTerm,
   setSearchTerm,
   selectedType,
-   setSelectedType,
-  onSearch,
+  setSelectedType,
 }) => {
-  const clearFilter = (filter: "type" | "style") => {
-    if (filter === "type") setSelectedType("");
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onSearch();
+  const clearFilter = () => {
+    setSelectedType('');
   };
 
   return (
     <>
 
-      <form className="search-box" onSubmit={handleSubmit}>
+      <form className="search-box">
         <input
           type= "text"
           placeholder="Search artworks"
@@ -37,10 +30,7 @@ const SearchBar: React.FC<Props> = ({
           onChange={(e) => setSearchTerm(e.target.value)}
           className="input"
         />
-        <button type="submit" className="search-button">
-          <i className="fa-solid fa-magnifying-glass"></i>
-        </button>
-
+        
         <select
           value={selectedType}
           onChange={(e) => setSelectedType(e.target.value)}
@@ -59,7 +49,7 @@ const SearchBar: React.FC<Props> = ({
         {selectedType && (
           <span className="filter-chip">
             {selectedType}
-            <button onClick={() => clearFilter("type")}>x</button>
+            <button onClick={clearFilter}>x</button>
           </span>
         )}
       </div>

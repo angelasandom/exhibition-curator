@@ -1,50 +1,74 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { useSearchParams } from 'react-router-dom';
 import ArtworkList from '../components/ArtworkList';
 import Navbar from '../components/Navbar';
 import type { ArtworkType } from '../types/ArtworkType';
 import { fetchRandomArtworks, fetchFilteredArtworks } from '../services/api';
 import SearchBar from '../components/SearchBar';
-import "./Home.css"
+import "./Home.css";
 
 const itemsPerPage = 10;
 
 const Home: React.FC = () => {
-  
-  const [randomKey] = useState(() => Date.now());
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const [searchTerm, setSearchTerm] =  useState('');
+  const [searchTerm, setSearchTerm] = useState('');
   const [selectedType, setSelectedType] = useState('');
   const [filteredResults, setFilteredResults] = useState<ArtworkType[]>([]);
-  const [currentPage, setCurrentPage] =  useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const { data: randomArtworks = [], isLoading, error } = useQuery<ArtworkType[]>({
-    queryKey: ['artworks', randomKey],
+    queryKey: ['artworks'],
     queryFn: fetchRandomArtworks,
     gcTime: 0,
     staleTime: 0,
     refetchOnWindowFocus: false,
   });
 
-  const handleSearch = async () => {
+  //when load show query in URL
+  useEffect(() => {
+    const initialType = searchParams.get('type') || '';
+    const initialSearch = searchParams.get('search') || '';
+    setSearchTerm(initialSearch);
+    setSelectedType(initialType);
 
-    setCurrentPage(1);
-
-    if (searchTerm || selectedType) {
-      const results = await fetchFilteredArtworks({
-        searchTerm,
-        type: selectedType
-      });
-      setFilteredResults(results);
-    } else {
-      setFilteredResults([]); 
+    if (initialType || initialSearch) {
+      handleSearch(initialSearch, initialType);
     }
+  }, []);
+
+  //when change filters and search update results and URL
+  useEffect(() => {
+    const delay = setTimeout(() => {
+      const params: any = {};
+      if (selectedType) params.type = selectedType;
+      if (searchTerm) params.search = searchTerm;
+      setSearchParams(params);
+
+      if (selectedType || searchTerm) {
+        handleSearch(searchTerm, selectedType);
+      } else {
+        setFilteredResults([]);
+      }
+
+      setCurrentPage(1);
+    }, 300);
+
+    return () => clearTimeout(delay);
+  }, [searchTerm, selectedType]);
+
+  const handleSearch = async (query: string, type: string) => {
+    const results = await fetchFilteredArtworks({
+      searchTerm: query,
+      type: type,
+    });
+    setFilteredResults(results);
   };
 
   const paginatedResults = useMemo(() => {
     const start = (currentPage - 1) * itemsPerPage;
-    const end =  currentPage * itemsPerPage;
-    return filteredResults.slice(start, end);
+    return filteredResults.slice(start, start + itemsPerPage);
   }, [filteredResults, currentPage]);
 
   const totalPages = Math.ceil(filteredResults.length / itemsPerPage);
@@ -57,13 +81,7 @@ const Home: React.FC = () => {
     if (currentPage > 1) setCurrentPage((prev) => prev - 1);
   };
 
-  useEffect(() => {
-
-    handleSearch();
-  }, []);
-
   if (isLoading) return <p>Loading...</p>;
-
   if (error) return <p>Error loading artworks.</p>;
 
   return (
@@ -75,24 +93,26 @@ const Home: React.FC = () => {
           setSearchTerm={setSearchTerm}
           selectedType={selectedType}
           setSelectedType={setSelectedType}
-          onSearch={handleSearch}
         />
-
       </header>
 
-      <div className='subheader'>
-        <h2 className= 'text-gallery'>Manage your own Art Gallery</h2>
-        <h3 className='text-collections'>Create different Art Collections</h3>
+      <div className="subheader">
+        <h2 className="text-gallery">Manage your own Art Gallery</h2>
+        <h3 className="text-collections">Create different Art Collections</h3>
       </div>
 
-      <ArtworkList artworks= {filteredResults.length ? paginatedResults : randomArtworks} />
+      <ArtworkList
+        artworks={filteredResults.length ? paginatedResults : randomArtworks}
+      />
 
-      {filteredResults.length >itemsPerPage && (
+      {filteredResults.length > itemsPerPage && (
         <div className="pagination">
           <button onClick={goToPrev} disabled={currentPage === 1}>
             ← Previous
           </button>
-          <span>Page {currentPage} of {totalPages}</span>
+          <span>
+            Page {currentPage} of {totalPages}
+          </span>
           <button onClick={goToNext} disabled={currentPage === totalPages}>
             Next →
           </button>
