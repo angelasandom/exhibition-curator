@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useCollections } from "../hooks/useCollections";
+import { useNavigate } from "react-router-dom";
+
+import { useUser } from "../context/UserContext";
 import type { ArtworkType } from "../types/ArtworkType";
 import "./CreateCollectionButton.css";
 
@@ -10,6 +13,8 @@ interface CreateCollectionButtonProps {
 const CreateCollectionButton: React.FC<CreateCollectionButtonProps> = ({ artwork }) => {
 
   const { createCollection, addArtwork, getCollections } =useCollections();
+  const { user } = useUser();
+  const navigate = useNavigate();
 
   const [showModal, setShowModal] = useState(false);
   const [newCollectionName, setNewCollectionName] = useState("");
@@ -17,18 +22,15 @@ const CreateCollectionButton: React.FC<CreateCollectionButtonProps> = ({ artwork
   const [selectedCollection, setSelectedCollection] = useState("");
   const [isCreatingNew, setIsCreatingNew] = useState( false);
   const [isLoading , setIsLoading] = useState(false);
+  const [authWarning, setAuthWarning] = useState(false);
+  const [feedbackMessage, setFeedbackMessage] = useState("");
+
 
   const fetchCollections = async () => {
-
     try {
-      console.log("Fetching collections for modal...");
       const collections = await getCollections();
-      console.log("Collections received:", collections);
       setExistingCollections(collections);
-  
-      if (collections.length === 0) {
-        setIsCreatingNew(true);
-      }
+      setIsCreatingNew(collections.length === 0);
     } catch (err) {
       console.error("Error fetching collections:", err);
       setIsCreatingNew(true);
@@ -36,55 +38,43 @@ const CreateCollectionButton: React.FC<CreateCollectionButtonProps> = ({ artwork
   };
 
   useEffect(() => {
-    if (showModal) {
-      fetchCollections();
-    }
+    if (showModal && user) fetchCollections();
+  }, [showModal, user]);
 
-  }, [showModal]); 
+
+  const handleClick = () => {
+    if (!user) {
+      setAuthWarning(true);
+      return;
+    }
+    setShowModal(true);
+  };
 
   const handleCreateAndAdd = async () => {
     if (!artwork) return;
 
     setIsLoading(true);
+    setFeedbackMessage("");
+
     try {
-      if (isCreatingNew) {
-        if (!newCollectionName.trim()) {
+      const collectionName = isCreatingNew ? newCollectionName.trim() : selectedCollection;
 
-          alert("Please enter a  collection name");
-          setIsLoading( false);
-
-          return;
-        }
-        
-        console.log("Creating new collection:", newCollectionName);
-        await createCollection(newCollectionName);
-        
-        console.log ("Adding artwork to new collection");
-        await addArtwork(newCollectionName, artwork);
-        
-        alert(`Artwork "${artwork.title}" added to new collection "${newCollectionName}"`);
-      } else {
-
-        if (!selectedCollection) {
-          alert("Please select a collection.");
-          setIsLoading(false);
-
-          return;
-        }
-        
-        console.log("Adding artwork to existing collection:", selectedCollection);
-        await addArtwork(selectedCollection, artwork);
-        
-        alert(`Artwork "${artwork.title}" added to "${selectedCollection}"`);
+      if (!collectionName) {
+        setFeedbackMessage("Please provide a collection name.");
+        setIsLoading(false);
+        return;
       }
-      
+
+      if (isCreatingNew) await createCollection(collectionName);
+
+      await addArtwork(collectionName, artwork);
+      setFeedbackMessage(`Artwork "${artwork.title}" added to "${collectionName}".`);
       closeModal();
     } catch (err: any) {
-      console.error("nError adding artwork:", err);
-      alert(err.message || "Failed to add artwork to collection");
-
+      console.error(err);
+      setFeedbackMessage(err.message || "Failed to add artwork.");
     } finally {
-      setIsLoading (false);
+      setIsLoading(false);
     }
   };
 
@@ -93,62 +83,71 @@ const CreateCollectionButton: React.FC<CreateCollectionButtonProps> = ({ artwork
     setNewCollectionName("");
     setSelectedCollection("");
     setIsCreatingNew(false);
-    setIsLoading( false);
-    setExistingCollections([]); 
+    setExistingCollections([]);
+    setFeedbackMessage("");
   };
 
-  if (!artwork) {
-    return null;
-  }
+  const handleLoginRedirect = () => {
+    navigate("/login");
+  };
+
+  if (!artwork) return null;
 
   return (
     <>
-      <button 
-        className="add-to-collection-btn"
-        onClick={() => setShowModal(true)}
-      >
+      <button className="add-to-collection-btn" onClick={handleClick}>
         ♡ Add to Collection
       </button>
+
+      {authWarning && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h3 className="modal-title">Login Required</h3>
+            <p>You need to be logged in to save artworks to collections.</p>
+            <div className="modal-buttons">
+              <button className="btn-cancel" onClick={() => setAuthWarning(false)}>
+                Cancel
+              </button>
+              <button className="btn-add" onClick={handleLoginRedirect}>
+                Log In
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {showModal && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <h3 className="modal-title">Add "{artwork.title}" to Collection</h3>
-         
+            <h3 className="modal-title">Add "{artwork.title}" to a Collection</h3>
+
             {existingCollections.length > 0 && (
-              <div className="radio-option">
-                <label>
-                  <input
-                    type="radio"
-                    checked={!isCreatingNew}
-                    onChange={() => setIsCreatingNew(false)}
-                  />
-                  Add to existing collection
-                </label>
-              </div>
-            )}
+  <>
+    <div className="radio-option">
+      <label>
+        <input
+          type="radio"
+          checked={!isCreatingNew}
+          onChange={() => setIsCreatingNew(false)}
+        />
+        Add to existing collection
+      </label>
+    </div>
 
-            {!isCreatingNew && existingCollections.length  > 0 && (
-              <select
-                className="collection-select"
-                value={selectedCollection}
-                onChange={(e) => setSelectedCollection(e.target.value)}
-              >
-                <option value="">Select a collection</option>
-                {existingCollections.map ((collection) => (
-                  <option key={collection.name} value={collection.name}>
-                    {collection.name} ({collection.artworks?.length || 0} artworks)
-                  </option>
-
-                ))}
-              </select>
-            )}
-
-            {existingCollections.length === 0 && (
-              <p className="no-collections-message">
-                No existing collections.
-              </p>
-            )}
+    <select
+      className="collection-select"
+      value={selectedCollection}
+      onChange={(e) => setSelectedCollection(e.target.value)}
+    >
+      <option value="">Select a collection</option>
+      {existingCollections.map((collection) => (
+        <option key={collection.name} value={collection.name}>
+          {collection.name} ({collection.artworks?.length || 0})
+        </option>
+      ))}
+    </select>
+  </>
+)}
 
             <div className="radio-option">
               <label>
@@ -168,24 +167,17 @@ const CreateCollectionButton: React.FC<CreateCollectionButtonProps> = ({ artwork
                 value={newCollectionName}
                 onChange={(e) => setNewCollectionName(e.target.value)}
                 placeholder="Enter collection name"
-                autoFocus
               />
             )}
 
+            {feedbackMessage && <p className="feedback-message">{feedbackMessage}</p>}
+
             <div className="modal-buttons">
-              <button 
-                className="btn-cancel"
-                onClick={closeModal}
-                disabled={isLoading}
-              >
+              <button className="btn-cancel" onClick={closeModal} disabled={isLoading}>
                 Cancel
               </button>
-              <button 
-                className="btn-add"
-                onClick={handleCreateAndAdd}
-                disabled={isLoading}
-              >
-                {isLoading ? "Adding..." : "Add Artwork"}
+              <button className="btn-add" onClick={handleCreateAndAdd} disabled={isLoading}>
+                {isLoading ? "Saving..." : "Save"}
               </button>
             </div>
           </div>
@@ -193,7 +185,6 @@ const CreateCollectionButton: React.FC<CreateCollectionButtonProps> = ({ artwork
       )}
     </>
   );
-
 };
 
-export default CreateCollectionButton ;
+export default CreateCollectionButton;
