@@ -2,7 +2,7 @@ import { useState } from "react";
 import { createUserInMongoDB } from "../services/userService";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../firebase";
-import { useNavigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 
 const Register = () => {
@@ -11,6 +11,8 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
   const navigate = useNavigate();
 
   const { mutateAsync: createUser } = useMutation({
@@ -20,19 +22,16 @@ const Register = () => {
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+    setSuccess("");
 
-    if (password !== confirmPassword) {
-      setError("Passwords do not match.");
-      return;
-    }
+    if (!displayName.trim()) return setError("Please enter your name.");
+    if (!email.trim()) return setError("Please enter a valid email.");
+    if (password.length < 6) return setError("Password must be at least 6 characters.");
+    if (password !== confirmPassword) return setError("Passwords do not match.");
 
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-
-      if (!user.email) {
-        throw new Error("Email is missing.");
-      }
 
       await updateProfile(user, {
         displayName: displayName
@@ -40,14 +39,18 @@ const Register = () => {
 
       await createUser({
         uid: user.uid,
-        email: user.email,
-        displayName: displayName
+        email: user.email || "",
+        displayName,
       });
 
-      alert("You are registered.");
-      navigate("/login");
+      setSuccess("Account created successfully. Redirecting...");
+      setTimeout(() => navigate("/login"), 2000);
     } catch (err: any) {
-      setError(err.message);
+      if (err.code === "auth/email-already-in-use") {
+        setError("This email is already registered.");
+      } else {
+        setError(err.message || "Failed to register.");
+      }
     }
   };
 
@@ -61,7 +64,6 @@ const Register = () => {
           placeholder="Your name"
           value={displayName}
           onChange={(e) => setDisplayName(e.target.value)}
-          required
           className="input"
         />
         <input
@@ -74,7 +76,7 @@ const Register = () => {
         />
         <input
           type="password"
-          placeholder="Password"
+          placeholder="Password (min 8 characteres)"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
@@ -85,12 +87,15 @@ const Register = () => {
           placeholder="Confirm password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
-          required
           className="input"
         />
         <button type="submit" className="primary-button">Create account</button>
 
       </form>
+     
+       {error && <p className="error-text">{error}</p>}
+       {success && <p className="success-text">{success}</p>}
+
 
       <div className="choose-login">— or —</div>
 
@@ -98,7 +103,6 @@ const Register = () => {
       
       <button className="secondary-button"><a href="/login" className="login-link">Log in</a></button> 
 
-      {error && <p className="error-text">{error}</p>}
     </div>
   );
 };
