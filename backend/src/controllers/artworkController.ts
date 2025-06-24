@@ -28,19 +28,33 @@ export const searchArtworks = async (req: Request, res: Response) => {
       },
     });
 
+    console.log("Harvard API raw data:", harvard.data.records[0]);
+    
     const harvardResults = harvard.data.records
       .filter((art: any) => art.baseimageurl || art.primaryimageurl)
       .map((art: any) => {
         const typeValue = art.classification || 'Unknown';
-        return {
-          id: `harvard-${art.id}`,
-          title: art.title || 'Untitled',
-          imageUrl:  art.baseimageurl || art.primaryimageurl,
-          creator: art.people?.map((p: any) => p.name).join(', ') || 'Unknown',
-          type: typeValue,
-          source: 'Harvard Art Museums',
-        };
-      })
+        const creator = art.people?.map((p: any) => p.name).join(', ') || 'Unknown';
+        const culture =
+          art.culture ||
+          art.people?.map((p: any) => p.culture).filter(Boolean).join(', ') || "Not available";
+
+  const technique = art.technique || "Not available";
+
+  return {
+
+    id: `harvard-${art.id}`,
+    title: art.title || 'Untitled',
+    imageUrl: art.baseimageurl || art.primaryimageurl,
+    creator,
+    type: typeValue,
+    culture,
+    technique,
+    source: 'Harvard Art Museums',
+  };
+  
+})
+     
       .filter((art: any) => {
         const typeMatch = !type || (typeof art.type === 'string' && art.type.toLowerCase().includes((type as string).toLowerCase()));
         return typeMatch;
@@ -55,6 +69,8 @@ export const searchArtworks = async (req: Request, res: Response) => {
       },
     });
 
+    console.log("Cleveland API raw data:", cleveland.data.data[0]);
+
     const clevelandResults =  cleveland.data.data
       .filter((art: any) => art.images?.web?.url)
       .map((art: any) => {
@@ -65,6 +81,8 @@ export const searchArtworks = async (req: Request, res: Response) => {
           imageUrl: art.images.web.url,
           creator: art.creators?.map((c: any) =>  c.description).join(', ') || 'Unknown',
           type: typeValue,
+          culture: art.culture?.join(', ') || "Not available",
+          technique: art.technique || "Not available",
           source: 'The Cleveland Museum of Art',
         };
       })
