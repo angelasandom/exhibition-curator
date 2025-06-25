@@ -3,7 +3,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 2rem;
+    padding: 0 4rem;
     height: 70px;
     background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.85) 100%);
     backdrop-filter: blur(10px);
@@ -79,7 +79,7 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    margin-left: 2rem;
+    margin-left: 0;
 }
 
 .navbar a:first-child {
@@ -100,7 +100,7 @@
     overflow: hidden;
     flex: 1;
     max-width: 500px;
-    margin: 0 2rem;
+    margin-left: 4rem;
     border: 1px solid rgba(255,255,255,0.1);
     transition: all 0.3s ease;
 }

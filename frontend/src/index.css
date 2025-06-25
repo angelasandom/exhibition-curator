@@ -28,7 +28,7 @@ header {
 }
 
 .subheader .text-collections {
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
 }
 
 .subheader .feature-text {
@@ -46,7 +46,6 @@ body {
 h1, h2, h3 {
   font-family: 'Playfair Display', serif;
   text-align: center;
-  margin-bottom: 1.5rem;
   color: white;
 }
 

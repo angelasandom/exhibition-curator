@@ -2,6 +2,7 @@
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
+  background-color: black;
 }
 
 .loading-message {
@@ -18,7 +19,6 @@
   padding: 40px;
 }
 
-/* Create Collection */
 .create-collection-section {
   margin-bottom: 30px;
 }
@@ -28,7 +28,7 @@
   color: white;
   padding: 12px 24px;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
   cursor: pointer;
   font-size: 16px;
   font-weight: 500;
@@ -92,7 +92,6 @@
   background-color: #da190b;
 }
 
-/* Collections */
 .no-collections-message {
   text-align: center;
   color: #666;
@@ -105,7 +104,7 @@
   margin-bottom: 40px;
   border: 2px solid #e0e0e0;
   padding: 20px;
-  border-radius: 12px;
+  border-radius: 16px;
   background-color: #fafafa;
   transition: box-shadow 0.3s ease;
 }
@@ -146,7 +145,6 @@
   background-color: #c82333;
 }
 
-/* Artwork Grid */
 .collection-artworks-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -164,19 +162,18 @@
   position: absolute;
   top: 10px;
   right: 10px;
-  background-color: rgba(244, 67, 54, 0.9);
+  background-color: #dc3545;
   color: white;
   border: none;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
+  border-radius: 6px;
+  width: 24px;
+  height: 24px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 10;
-  transition: background-color 0.3s ease;
 }
 
 .remove-from-collection-btn:hover {
@@ -191,7 +188,6 @@
   grid-column: 1 / -1;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .my-gallery-container {
     padding: 15px;
