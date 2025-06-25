@@ -8,12 +8,12 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 400px;
+  height: 520px;
 }
 
 .artwork-card img {
   width: 100%;
-  height: 250px;
+  height: 320px;
   border-radius: 4px;
   margin-bottom: 0.5rem;
   object-fit: cover;
@@ -21,17 +21,20 @@
 }
 
 .artwork-card h3 {
-  margin: 0.5rem 0 0.3rem 0;
+  margin: 1.2rem 0 0.2rem 0;
   font-size: 1rem;
   line-height: 1.2;
   overflow: hidden;
   display: -webkit-box;
+  -webkit-line-clamp: 2; 
   -webkit-box-orient: vertical;
+  max-height: 2.4em;
+  text-overflow: ellipsis;
 }
 
 .artwork-card p {
-  margin: 0 0 0.5rem 0;
-  font-size: 0.9rem;
+  margin: 0.3rem 0 0.5rem 0;
+  font-size: 1rem;
   color: #ccc;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -112,11 +115,11 @@
 
 @media (max-width: 768px) {
   .artwork-card {
-    height: 350px;
+    height: 430px;
   }
   
   .artwork-card img {
-    height: 200px;
+    height: 210px;
   }
   
   .artwork-card h3 {
@@ -130,11 +133,12 @@
 
 @media (max-width: 480px) {
   .artwork-card {
-    height: 320px;
+    height: 410px;
   }
   
   .artwork-card img {
-    height: 180px;
+    height: 250px;
+    margin-bottom: 0.2rem;
   }
   
   .artwork-card h3 {
@@ -146,7 +150,7 @@
   }
 }
 
-.modal-content {
+  .modal-content {
     width: 90%;
     padding: 1.25rem;
     font-size: 0.95rem;

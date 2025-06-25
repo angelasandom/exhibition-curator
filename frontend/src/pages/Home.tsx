@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useSearchParams } from 'react-router-dom';
 import ArtworkList from '../components/ArtworkList';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import type { ArtworkType } from '../types/ArtworkType';
 import { fetchRandomArtworks, fetchFilteredArtworks } from '../services/api';
 import SearchBar from '../components/SearchBar';
@@ -119,6 +120,8 @@ const Home: React.FC = () => {
           </button>
         </div>
       )}
+
+      <Footer />
     </div>
   );
 };

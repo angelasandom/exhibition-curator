@@ -101,7 +101,7 @@ const CreateCollectionButton: React.FC<CreateCollectionButtonProps> = ({ artwork
 
       {authWarning && (
         <div className="modal-overlay">
-          <div className="modal-content">
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <h3 className="modal-title">Login Required</h3>
             <p>You need to be logged in to save artworks to collections.</p>
             <div className="modal-buttons">
@@ -118,7 +118,7 @@ const CreateCollectionButton: React.FC<CreateCollectionButtonProps> = ({ artwork
 
       {showModal && (
         <div className="modal-overlay">
-          <div className="modal-content">
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <h3 className="modal-title">Add "{artwork.title}" to a Collection</h3>
 
             {existingCollections.length > 0 && (
