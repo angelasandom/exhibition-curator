@@ -4,6 +4,8 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../firebase";
 import { useNavigate} from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -55,6 +57,8 @@ const Register = () => {
   };
 
   return (
+    <>
+    <Navbar />
     <div className="login-box">
       <h2 className="login-text">Register</h2>
 
@@ -102,8 +106,10 @@ const Register = () => {
       <p>Already have an account?</p>
       
       <button className="secondary-button"><a href="/login" className="login-link">Log in</a></button> 
-
+      
     </div>
+    <Footer/>
+    </>
   );
 };
 

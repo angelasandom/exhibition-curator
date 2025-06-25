@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
 
         <div className="footer-links">
           <Link to="/">Home</Link>
-          <Link to="/my-gallery">My Gallery</Link>
+          <Link to="/mygallery">My Gallery</Link>
           <Link to="/login">Login</Link>
         </div>
 

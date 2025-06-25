@@ -8,6 +8,7 @@ import {
 import { auth } from "../firebase";
 import { useUser } from "../context/UserContext";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import "./Login.css"
 
 const Login = () => {
@@ -102,6 +103,7 @@ const Login = () => {
 
         {error && <p className="error-text">{error}</p>}
       </div>
+      <Footer />
     </>
   );
 };

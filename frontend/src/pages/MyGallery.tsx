@@ -4,6 +4,7 @@ import type { ArtworkType } from "../types/ArtworkType";
 import { useUser } from "../context/UserContext";
 import CollectionArtwork from "../components/CollectionArtwork";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import LoadingSpinner from "../components/LoadingSpinner";
 import "./MyGallery.css";
 
@@ -92,9 +93,9 @@ const MyGallery: React.FC = () => {
   }
 
   return (
+    <>
+    <Navbar />
     <div className="my-gallery-container">
-      <Navbar />
-      
       <div className="create-collection-section">
         {!showCreateForm ? (
           <button 
@@ -168,6 +169,8 @@ const MyGallery: React.FC = () => {
         ))
       )}
     </div>
+    <Footer />
+    </>
   );
 };
 

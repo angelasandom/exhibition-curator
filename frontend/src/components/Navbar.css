@@ -12,6 +12,11 @@
     z-index: 100;
 }
 
+.header-title {
+   background-color: black;
+
+}
+
 .nav-user-actions {
     display: flex;
     align-items: center;
