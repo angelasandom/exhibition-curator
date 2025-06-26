@@ -2,7 +2,7 @@ import { useState } from "react";
 import { createUserInMongoDB } from "../services/userService";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../firebase";
-import { useNavigate, Link} from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
