@@ -1,10 +1,10 @@
 Exhibition Curator Platform
 
-PROJECT SUMMARY
+🎨 PROJECT SUMMARY
 
 Exhibition Curator is a web platform that enables users to explore and curate virtual art exhibitions by combining collections from Harvard Art Museums and Cleveland Museum of Art. Users can search through thousands of artworks, create personalized exhibition collections, and manage their curated galleries.
 
-LIVE DEMO
+🔗 LIVE DEMO
 
 https://exhibition-curator-art-gallery.netlify.app/
 
@@ -42,7 +42,7 @@ Secure login with email/password or Google account
 
 Optimized for desktop, tablet, and mobile devices
 
-TECH STACK
+🖱 TECH STACK
 
 - Frontend: React 18 with TypeScript
 
@@ -68,7 +68,7 @@ DEPLOYMENT
 
 - Backend: Render
 
-SETUP INSTRUCTIONS
+🖥 SETUP INSTRUCTIONS
 
 - Prerequisites
 
