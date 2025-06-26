@@ -28,11 +28,14 @@ const Artwork: React.FC<Props> = ({ artwork, showAddButton = true }) => {
         <div className="artwork-info">
           <h3>{artwork.title}</h3>
           <p>{artwork.creator}</p>
-        {showAddButton && <CreateCollectionButton artwork={artwork} />}
+        {showAddButton && (<div onClick={(e) => e.stopPropagation()}>
+      <CreateCollectionButton artwork={artwork} />
+  </div>
+)}
       </div>
     </div>
       {showModal && (
-        <div className="modal-overlay" onClick={closeModal}>
+        <div className="modal-overlay" onClick={closeModal }>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <h2>{fallback(artwork.title)}</h2>
             <img src={artwork.imageUrl} alt={artwork.title} className="modal-image" />
