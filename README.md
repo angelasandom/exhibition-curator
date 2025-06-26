@@ -6,7 +6,9 @@ Exhibition Curator is a web platform that enables users to explore and curate vi
 
 LIVE DEMO
 
-exhibition-curator-art-gallery.netlify.app
+https://exhibition-curator-art-gallery.netlify.app/
+
+RENDER HOST
 
 https://exhibition-curator-6pxh.onrender.com
 

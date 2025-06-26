@@ -65,6 +65,11 @@ p {
   font-size: 0.8rem;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 @media (max-width: 768px) {
   header {
     padding-top: 1.5rem;

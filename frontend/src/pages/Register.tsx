@@ -2,7 +2,7 @@ import { useState } from "react";
 import { createUserInMongoDB } from "../services/userService";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../firebase";
-import { useNavigate} from "react-router-dom";
+import { useNavigate, Link} from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -28,7 +28,7 @@ const Register = () => {
 
     if (!displayName.trim()) return setError("Please enter your name.");
     if (!email.trim()) return setError("Please enter a valid email.");
-    if (password.length < 6) return setError("Password must be at least 6 characters.");
+    if (password.length < 6) return setError("Password must be at least 8 characters.");
     if (password !== confirmPassword) return setError("Passwords do not match.");
 
     try {
@@ -105,7 +105,9 @@ const Register = () => {
 
       <p>Already have an account?</p>
       
-      <button className="secondary-button"><a href="/login" className="login-link">Log in</a></button> 
+      <button type="button" className="secondary-button" onClick={() => navigate("/login")}>
+        Log in
+      </button>
       
     </div>
     <Footer/>
