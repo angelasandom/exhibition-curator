@@ -1,5 +1,3 @@
-/* CreateCollectionButton.css */
-
 .add-to-collection-btn {
   background-color: #402649;
   color: white;
@@ -97,18 +95,19 @@
 .modal-buttons {
   display: flex;
   gap: 10px;
-  justify-content: flex-end;
+  justify-content:center;
 }
 
 .btn-cancel {
   background-color: #6c757d;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 15px 30px;
   border-radius: 5px;
   cursor: pointer;
   font-size: 14px;
   transition: background-color 0.3s ease;
+  margin: 0;
 }
 
 .btn-cancel:hover {
@@ -124,6 +123,7 @@
   cursor: pointer;
   font-size: 14px;
   transition: background-color 0.3s ease;
+  padding: 15px 30px;
 }
 
 .btn-add:hover {
@@ -136,7 +136,6 @@
   cursor: not-allowed;
 }
 
-/* Responsive */
 @media (max-width: 480px) {
   .modal-content {
     min-width: 300px;
